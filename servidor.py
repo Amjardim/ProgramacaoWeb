@@ -42,12 +42,12 @@ def ThreadedServer():
                 path_arquivo = con.recv(bufferSize)
 
                 #FAZER ISSO
-                if path_arquivos :
-                    percorre_arquivos()
-                if exists:
-                    break
-                else:
-                    print('Erro 404')
+                #if path_arquivos :
+                #    percorre_arquivos()
+                #if exists:
+                #    break
+                #else:
+                #    print('Erro 404')
 
                 print(cliente, path_arquivo)
                 con.send(path_arquivo)
