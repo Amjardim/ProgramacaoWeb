@@ -3,7 +3,7 @@ from genericpath import isfile
 from sys import argv, path, stderr
 from socket import getaddrinfo, socket
 from socket import AF_INET, SOCK_STREAM, IPPROTO_TCP, AI_ADDRCONFIG
-from posix import abort
+#from posix import abort
 import os
 from time import sleep
 
@@ -22,15 +22,16 @@ def ThreadedServer():
     #Tenta criar o socket
     tcpSocket = criaSocket()
     origem = (host, port)
-    #Tenta ouvir o socket criado
-    listen(tcpSocket)
+
     #Tenta dar um bind no socket criado
     bindSocket(tcpSocket, origem)
+    #Tenta ouvir o socket criado
+    listen(tcpSocket)
     print("Servidor pronto")
 
     while(True):
         con, cliente = tcpSocket.accept()
-        cliente.settimeout(60)
+        #cliente.settimeout(60)
         pid = fork()
         if pid == 0:
             #esse é o filho
@@ -66,7 +67,7 @@ def listen(tcpSocket):
         tcpSocket.listen(0)
     except:
         print("Erro ao começar a escutar a porta", file=stderr)
-        abort()
+        os.abort()
     print("Iniciando o serviço")
     return
 
@@ -75,15 +76,16 @@ def bindSocket(tcpSocket, origem):
         tcpSocket.bind(origem)
     except:
         print("Erro ao dar bind no socket do servidor", origem, file=stderr)
-        abort()
+        os.abort()
     return
 
 def criaSocket():
     #AF_INET Ipv4Address, SOCK_STREAM Byte-stream socket (TCP)
     tcpSocket = socket(AF_INET, SOCK_STREAM)
+    print(tcpSocket)
     if not tcpSocket:
         print("Não consegui criar o socket")
-        abort()
+        os.abort()
     return tcpSocket
 
 #FAZER ISSO
@@ -92,3 +94,6 @@ def get(path_arquivo):
     #path = ROOT_DIR + path_arquivo
     if os.path.exists(path_arquivo):
         return 
+
+ThreadedServer()
+
