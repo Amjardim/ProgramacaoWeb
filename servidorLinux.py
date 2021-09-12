@@ -6,8 +6,8 @@ from socket import AF_INET, SOCK_STREAM, IPPROTO_TCP, AI_ADDRCONFIG
 import os
 from time import sleep
 import sys
-
 import arquivo as Arquivo
+
 import servidorController as ServController
 
 class Servidor():
@@ -15,7 +15,7 @@ class Servidor():
     def __init__(self):
         self.bufferSize = 1024
         self.serverConfig = Arquivo.ServerConfigurator()
-        self.serverController = ServController.ServidorController()
+        self.serverController = ServController.ServidorController(self.serverConfig)
         
     def startServer(self):
         tcpSocket = self.criaSocket()
@@ -37,7 +37,7 @@ class Servidor():
                 if not requisicao:
                     break
                 else:
-                    self.serverController.gerente_de_requisicao(requisicao, con)
+                    self.serverController.gerente_de_requisicao(requisicao, con,cliente)
                 print("Conexao terminada com ", cliente)
                 con.close()
                 exit()
