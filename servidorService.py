@@ -16,4 +16,5 @@ class ServidorService():
         f = open(os_prepared_path,"rb")
         size = os.path.getsize(os_prepared_path)
         fileToResponse = f.read(size)
+        f.close()
         return fileToResponse
