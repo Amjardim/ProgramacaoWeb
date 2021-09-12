@@ -1,10 +1,9 @@
 import servidorService as servService
-import arquivo as Arquivo
 
 class ServidorController():
     
     def __init__(self, servConfig):
-        self.servidorService = servService.ServidorService()
+        self.servidorService = servService.ServidorService(servConfig)
         self.servidorConfigurator = servConfig
         self.COMANDO = "comando"
         self.CAMINHO = "caminho"

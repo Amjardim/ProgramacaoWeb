@@ -6,7 +6,7 @@ class ServerConfigurator():
     def __init__(self, host='127.0.0.1', port=8080):
         self.host = host
         self.port = port
-        self.filelist = ["arq.html","arq.js","arq.jpeg","arq.png","arq.gif"]
+        self.filelist = ["arquivo.html","arq.js","arq.jpeg","arq.png","arq.gif"]
         self.path_dir = "./arquivo"
         self.pag_erro = "erro.html"
         

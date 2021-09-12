@@ -1,9 +1,14 @@
 import os
+import arquivo as Arquivo
 
 class ServidorService():
-        
+    
+    def __init__(self, servConfig):
+        self.servidorConfigurator = servConfig
+
     def arquivo_existe(self,path_arquivo):
-        return os.path.exists(os.path.abspath("."+path_arquivo))
+        return (( os.path.exists(os.path.abspath("."+path_arquivo)) and
+               ( path_arquivo.split('/')[-1] in self.servidorConfigurator.get_filelist()) ))
     
     def getArquivo(self, path_arquivo):
         # Le e retorna arquivo inteiro
