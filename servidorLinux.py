@@ -7,78 +7,69 @@ import os
 from time import sleep
 import sys
 
-def startServer():
-    bufferSize = 1024
-    host = '127.0.0.1'
+import arquivo as Arquivo
+import servidorController as ServController
 
-    if len(argv) > 1 and (argv[1]==8080 or argv[1]==80): 
-        port = int(argv[1])
-    else:
-        port = 8080
-
-    tcpSocket = criaSocket()
+class Servidor():
     
-    origem = (host, port)
+    def __init__(self):
+        self.bufferSize = 1024
+        self.serverConfig = Arquivo.ServerConfigurator()
+        self.serverController = ServController.ServidorController()
+        
+    def startServer(self):
+        tcpSocket = self.criaSocket()
+        origem = (self.serverConfig.get_host(), self.serverConfig.get_port())
 
-    bindSocket(tcpSocket, origem)
-    
-    listen(tcpSocket)
+        self.bindSocket(tcpSocket, origem)
+        
+        self.listen(tcpSocket)
 
-    print("Servidor pronto")
+        print("Servidor pronto")
 
-    while(True):
-        con, cliente = tcpSocket.accept()
-        pid = os.fork()
-        if pid == 0:
-            tcpSocket.close()
-            print("Servidor connectado com ", cliente)
-            requisicao = con.recv(bufferSize)
-            if not path_arquivo:
-                break
-            
-            if requisicao.contains("arquivo/"):
-                path_arquivo = requisicao.extrairCaminho()
-                arquivo = get(path_arquivo)
-                con.send(arquivo)                
-            print(path_arquivo)
-            con.send(path_arquivo)                
-            print("Conexao terminada com ", cliente)
-            con.close()
-            exit()
-        else:
-            con.close()
-    return
+        while(True):
+            con, cliente = tcpSocket.accept()
+            pid = os.fork()
+            if pid == 0:
+                tcpSocket.close()
+                print("Servidor connectado com ", cliente)
+                requisicao = con.recv(self.bufferSize)
+                if not requisicao:
+                    break
+                else:
+                    self.serverController.gerente_de_requisicao(requisicao, con)
+                print("Conexao terminada com ", cliente)
+                con.close()
+                exit()
+            else:
+                con.close()
+        return
 
-def listen(tcpSocket):
-    try:
-        tcpSocket.listen(0)
-    except:
-        print("Erro ao comecar a escutar a porta", file=stderr)
-        os.abort()
-    print("Iniciando o servico")
-    return
+    def listen(self,tcpSocket):
+        try:
+            tcpSocket.listen(0)
+        except:
+            print("Erro ao comecar a escutar a porta", file=stderr)
+            os.abort()
+        print("Iniciando o servico")
+        return
 
-def bindSocket(tcpSocket, origem):
-    try:
-        e = tcpSocket.bind(origem)
-    except:
-        print(sys.exc_info()[0])
-        print("Erro ao dar bind no socket do servidor", origem, file=stderr)
-        os.abort()
-    return
+    def bindSocket(self,tcpSocket, origem):
+        try:
+            e = tcpSocket.bind(origem)
+        except:
+            print(sys.exc_info()[0])
+            print("Erro ao dar bind no socket do servidor", origem, file=stderr)
+            os.abort()
+        return
 
-def criaSocket():
-    tcpSocket = socket(AF_INET, SOCK_STREAM)
-    if not tcpSocket:
-        print("Nao consegui criar o socket")
-        os.abort()
-    return tcpSocket
-
-def get(path_arquivo):
-    if os.path.exists(path_arquivo):
-        return 
+    def criaSocket(self):
+        tcpSocket = socket(AF_INET, SOCK_STREAM)
+        if not tcpSocket:
+            print("Nao consegui criar o socket")
+            os.abort()
+        return tcpSocket
 
 
-def getArquivo():
-
-startServer()
+servidor = Servidor()
+servidor.startServer()
