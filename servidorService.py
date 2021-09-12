@@ -6,6 +6,7 @@ class ServidorService():
         return os.path.exists(os.path.abspath("."+path_arquivo))
     
     def getArquivo(self, path_arquivo):
+        # Le e retorna arquivo inteiro
         os_prepared_path = "."+path_arquivo
         f = open(os_prepared_path,"rb")
         size = os.path.getsize(os_prepared_path)
