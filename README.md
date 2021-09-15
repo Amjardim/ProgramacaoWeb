@@ -2,6 +2,7 @@ Antonio Jardim - 1610422 & Felipe Metson 1520302
 
 INF1407 - Programação para Web - Trabalho 1 - Relatório:
 •	Colocando Servidor para funcionar:
+	Organizamos o servidor com a seguinte arquitetura: servidorLinux.py é o arquivo principal tendo um servidorController.py que lida com as requisições e o servidorLinux.py que lida com as regras de negocio estabelecidas. O arquivo.py carrega as configurações dos arquivos.
 	No terminal mover até pasta onde estão os arquivos do programa. Executar o comando:
 	python3 servidorLinux.py
 	E acessar quaisquer dos arquivos através do browser de sua preferência:
