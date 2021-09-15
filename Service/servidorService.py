@@ -1,5 +1,7 @@
 import os
-import arquivo as Arquivo
+import sys
+sys.path.insert(1,"/../")
+from Configurator import arquivo as Arquivo
 
 class ServidorService():
     

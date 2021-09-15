@@ -6,9 +6,9 @@ from socket import AF_INET, SOCK_STREAM, IPPROTO_TCP, AI_ADDRCONFIG
 import os
 from time import sleep
 import sys
-import arquivo as Arquivo
 
-import servidorController as ServController
+from Configurator import arquivo as Arquivo
+from Controller import servidorController as ServController
 
 class Servidor():
     

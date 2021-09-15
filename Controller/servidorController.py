@@ -1,4 +1,6 @@
-import servidorService as servService
+import sys
+sys.path.insert(1,"/../")
+from Service import servidorService as servService
 
 ERROR_MSG_SIZE = "ERROR: bad-request"
 COMANDO = "comando"
