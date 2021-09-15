@@ -13,8 +13,10 @@ class ServidorService():
     def getArquivo(self, path_arquivo):
         # Le e retorna arquivo inteiro
         os_prepared_path = "."+path_arquivo
+        _, extension = os.path.splitext(path_arquivo)
         f = open(os_prepared_path,"rb")
+        fileToResponse = []
         size = os.path.getsize(os_prepared_path)
         fileToResponse = f.read(size)
         f.close()
-        return fileToResponse
+        return fileToResponse, extension

@@ -13,7 +13,6 @@ import servidorController as ServController
 class Servidor():
     
     def __init__(self):
-        self.bufferSize = 1024
         self.serverConfig = Arquivo.ServerConfigurator()
         self.serverController = ServController.ServidorController(self.serverConfig)
         
@@ -34,7 +33,7 @@ class Servidor():
                 tcpSocket.close()
                 print("Servidor connectado com ", cliente)
                 while(True):
-                    requisicao = con.recv(self.bufferSize)
+                    requisicao = con.recv(self.serverConfig.get_package_size())
                     if not requisicao:
                         break
                     else:
