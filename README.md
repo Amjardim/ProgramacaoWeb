@@ -1,6 +1,7 @@
-Antonio Jardim - 1610422 & Felipe Metson 1520302
-INF1407 - Programação para Web - Trabalho 1 - Relatório:
-	
+# INF1407 - Programação para Web - Trabalho 1 - Relatório:
+
+Trabalho de Antonio Jardim - 1610422 & Felipe Metson 1520302	
+
 ## Arquitetura
 
 O servido foi organizado com a seguinte arquitetura 
