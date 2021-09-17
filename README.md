@@ -27,8 +27,12 @@ Pacotes utilizados que precisam estar instalados:
 
 ## Testes de Requisição:
 
-- Testando conexões simultâneas: Vale destacar que, como recomendado no enunciado, utilizamos de um sleep(10) para validar que o servidor possui capacidade de lidar com a  simultaneadade das requisições. Compravados nos testes que ocorrem sem problemas.
+- Testando conexões simultâneas: 
+	
+	Vale destacar que, como recomendado no enunciado, utilizamos de um sleep(10) para validar que o servidor possui capacidade de lidar com a  simultaneadade das requisições. Compravados nos testes que ocorrem sem problemas.
+	
 - Casos de teste:
+		
 	Testamos o acesso a todos as chamadas abaixo verificando se a resposta era compatível com o teste em questão.
 	
 	1) Casos de Retorno Válido:
